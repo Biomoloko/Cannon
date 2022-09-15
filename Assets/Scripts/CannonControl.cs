@@ -7,12 +7,13 @@ public class CannonControl : MonoBehaviour
     public float controlHor;
     public float controlVert;
 
-    float rotationHor = 0;
-    float rotationVert = 0;
+    float rotationHor = 40;
+    float rotationVert = 40;
 
     public float speedHor = 1;
     public float speedVer = 1;
 
+    public int wheelRotationSpeed;
     public Animator humanAnimator;
 
     Transform cannon;
@@ -33,23 +34,24 @@ public class CannonControl : MonoBehaviour
 
     public void Control()
     {
-        float rotationHor = Input.GetAxis("Horizontal");
-        float rotationVert = Input.GetAxis("Vertical");
+        rotationHor = Input.GetAxis("Horizontal") * Time.deltaTime;
+        rotationVert = Input.GetAxis("Vertical") * Time.deltaTime;
 
         controlHor = Mathf.Clamp(controlHor + rotationHor * speedHor, -30, 30);
         controlVert = Mathf.Clamp(controlVert + rotationVert * speedVer, -10, 30);
 
+        float timeSpeedfactor = Time.deltaTime * wheelRotationSpeed;
         if (rotationHor > 0 && controlHor < 30)
         {
             humanAnimator.SetBool("Push", true);
-            wheelR.Rotate(Vector3.back);
-            wheelL.Rotate(Vector3.forward);
+            wheelR.Rotate(Vector3.back * timeSpeedfactor);
+            wheelL.Rotate(Vector3.forward * timeSpeedfactor);
         }
         else if (rotationHor < 0 && controlHor > -30)
         {
             humanAnimator.SetBool("Pull", true);
-            wheelR.Rotate(Vector3.forward);
-            wheelL.Rotate(Vector3.back);
+            wheelR.Rotate(Vector3.forward * timeSpeedfactor);
+            wheelL.Rotate(Vector3.back * timeSpeedfactor);
         }
         else
         {

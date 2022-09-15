@@ -76,7 +76,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 766a26c291e7fb643b5f6c8141517149, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  myCost: 15
+  myCost: 20
   timeToDestroy: 2
   getShot: {fileID: 6414012237163856630, guid: 81538ac991ae40f4fbd12cd1d3a98c3a, type: 3}
   timeToDestroyMinCanv: 1

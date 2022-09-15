@@ -19,10 +19,14 @@ public class Shoot : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && ready == true)
+        if(Time.timeScale >= 1)
         {
-            ShootTheAmmo();
-        }   
+            if (Input.GetKeyDown(KeyCode.Space) && ready == true)
+            {
+                ShootTheAmmo();
+                AudioManager.instance.shootAudio.Play();
+            }   
+}
     }
     public void ShootTheAmmo()
     {

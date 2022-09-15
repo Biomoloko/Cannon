@@ -12,7 +12,7 @@ public class ToolTarget : MonoBehaviour
     public static Score score;
     [SerializeField] private float timeToDestroyMinCanv;
 
-    private static GameObject scoreMiniCanvas;
+    private static ScoreCanvas scoreMiniCanvas;
     private float MiniCanvasOffset = 2f;
 
     private void Awake()
@@ -25,7 +25,7 @@ public class ToolTarget : MonoBehaviour
         //проверить
         if(scoreMiniCanvas == null)
         {
-            scoreMiniCanvas = Resources.Load("ScoreCanvas") as GameObject;
+            scoreMiniCanvas = Resources.Load<GameObject>("ScoreCanvas").GetComponent<ScoreCanvas>();
         }
     }
 
@@ -35,16 +35,18 @@ public class ToolTarget : MonoBehaviour
         {
             ParticleSystem getNewShot = Instantiate(getShot, transform.position, transform.rotation);
 
+            AudioManager.instance.getShot.Play();
+            
             score.ScoreCounting(myCost);
             gameObject.transform.parent = null;
             Destroy(gameObject, timeToDestroy);
 
-            GameObject createScoreCanvas = Instantiate(scoreMiniCanvas,
+            ScoreCanvas createScoreCanvas = Instantiate(scoreMiniCanvas,
                                                        new Vector3(col.transform.position.x, col.transform.position.y + MiniCanvasOffset, col.transform.position.z),
                                                        Quaternion.identity);
-            
+            createScoreCanvas.Drawler(myCost.ToString());
             createScoreCanvas.transform.LookAt(Camera.main.transform);
-            Destroy(createScoreCanvas, timeToDestroyMinCanv);
+            Destroy(createScoreCanvas.gameObject, timeToDestroyMinCanv);
 
             
         }
