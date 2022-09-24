@@ -13,21 +13,22 @@ public class Timer : MonoBehaviour
     
     void Start()
     {
-        gameOverPanel = FindObjectOfType<GameOverPanel>();
+        gameOverPanel = FindObjectOfType<GameOverPanel>(true);
+        
         StartCoroutine(TimeBeforeStartTimer());
     }
 
     IEnumerator TimeBeforeStartTimer()
     {
+        
         yield return new WaitForSeconds(8f);
 
         while (time < fullTime)
         {
             yield return null;
             TimerWorks();
-        } 
-        gameOverPanel.DrawScore();
-        Time.timeScale = 0;
+        }
+        gameOverPanel.gameObject.SetActive(true);
     }
     void TimerWorks()
     {

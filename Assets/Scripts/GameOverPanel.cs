@@ -6,18 +6,15 @@ using TMPro;
 public class GameOverPanel : MonoBehaviour
 {
     [SerializeField] private TMP_Text scoreText, highScoreText;
-    [SerializeField] private int score;
-    [SerializeField] private int highScore;
-    void Awake()
-    {
-        score = FindObjectOfType<Score>().currentScore;
-        highScore = Score.highScore;
-    }
-    public void DrawScore()
-    {
-        scoreText.text = $"Score : {score}";
-        highScoreText.text = $"Highscore : {highScore}";
-    }
-    
+    public int currentScore, highScore;
+    private Score score;
 
+    private void OnEnable()
+    {
+        score = FindObjectOfType<Score>();
+
+        scoreText.text = $"Score : {score.currentScore}";
+        highScoreText.text = $"Best Score : {highScore}";
+        Time.timeScale = 0;
+    }
 }
