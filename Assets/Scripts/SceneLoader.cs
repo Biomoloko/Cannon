@@ -28,6 +28,11 @@ public class SceneLoader : MonoBehaviour
         SceneManager.LoadScene(1);
     }
 
+    public void retryThisScene()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+     }
+
     public void LightningBlackImage()
     {
         basicOpacity -= Time.deltaTime;
