@@ -7,14 +7,16 @@ using UnityEngine.Events;
 public class Timer : MonoBehaviour
 {
     [SerializeField] private Image timerImage;
-    [SerializeField] private float fullTime = 120;
+    [SerializeField] private float fullTime;
     [SerializeField] private float time;
     [SerializeField] private GameOverPanel gameOverPanel;
-    
+    [SerializeField] bool halfTime = false;
+
+    public static UnityEvent OnHalfTimer = new UnityEvent();
+
     void Start()
     {
         gameOverPanel = FindObjectOfType<GameOverPanel>(true);
-        
         StartCoroutine(TimeBeforeStartTimer());
     }
 
@@ -34,5 +36,10 @@ public class Timer : MonoBehaviour
     {
         time += Time.deltaTime;
         timerImage.fillAmount = 1 - time / fullTime;
+        if (time >= fullTime/2 && halfTime == false)
+        {
+            OnHalfTimer.Invoke();
+            halfTime = true;
+        }
     }
 }

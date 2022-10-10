@@ -6,7 +6,7 @@ using TMPro;
 public class GameOverPanel : MonoBehaviour
 {
     [SerializeField] private TMP_Text scoreText, highScoreText;
-    public int currentScore, highScore;
+    public int currentScore;
     private Score score;
 
     private void OnEnable()
@@ -14,7 +14,7 @@ public class GameOverPanel : MonoBehaviour
         score = FindObjectOfType<Score>();
 
         scoreText.text = $"Score : {score.currentScore}";
-        highScoreText.text = $"Best Score : {highScore}";
+        highScoreText.text = $"Best Score : {Score.highScore}";
         Time.timeScale = 0;
     }
 }

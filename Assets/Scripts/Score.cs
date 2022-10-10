@@ -6,17 +6,10 @@ using TMPro;
 
 public class Score : MonoBehaviour
 {
-    public static int highScore = 0;
+    public static int highScore;
     public int currentScore = 0;
     public TMP_Text scoreText;
-    void Start()
-    {
-    }
-
-    void Update()
-    {
-        
-    }
+    
     public void ScoreCounting(int targetCost)
     {
         currentScore += targetCost;
@@ -25,5 +18,6 @@ public class Score : MonoBehaviour
         {
             highScore = currentScore;
         }
+
     }
 }

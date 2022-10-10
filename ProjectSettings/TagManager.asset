@@ -13,6 +13,7 @@ TagManager:
   - Monitor
   - Pot
   - Vase
+  - FlyingTarget
   layers:
   - Default
   - TransparentFX

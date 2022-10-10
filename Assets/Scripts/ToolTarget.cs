@@ -33,12 +33,18 @@ public class ToolTarget : MonoBehaviour
     {
         if (col.gameObject.tag == "Ammo")
         {
+            if (gameObject.tag == "FlyingTarget")
+            {
+                var animator = GetComponent<Animator>();
+                Destroy(animator);
+            }
             ParticleSystem getNewShot = Instantiate(getShot, transform.position, transform.rotation);
 
             AudioManager.instance.getShot.Play();
             
             score.ScoreCounting(myCost);
             gameObject.transform.parent = null;
+            
             Destroy(gameObject, timeToDestroy);
 
             ScoreCanvas createScoreCanvas = Instantiate(scoreMiniCanvas,
@@ -47,7 +53,7 @@ public class ToolTarget : MonoBehaviour
             createScoreCanvas.Drawler(myCost.ToString());
             createScoreCanvas.transform.LookAt(Camera.main.transform);
             Destroy(createScoreCanvas.gameObject, timeToDestroyMinCanv);
-
+            
             
         }
     }

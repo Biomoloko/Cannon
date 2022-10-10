@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class SceneLoader : MonoBehaviour
+public class MainMenuManager : MonoBehaviour
 {
     [SerializeField] Image blackImage;
     [SerializeField] float basicOpacity;
@@ -28,11 +28,7 @@ public class SceneLoader : MonoBehaviour
         SceneManager.LoadScene(1);
     }
 
-    public void retryThisScene()
-    {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-     }
-
+    
     public void LightningBlackImage()
     {
         basicOpacity -= Time.deltaTime;
